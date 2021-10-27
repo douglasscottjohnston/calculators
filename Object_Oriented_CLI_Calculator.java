@@ -34,10 +34,12 @@ public class Object_Oriented_CLI_Calculator {
         System.out.println("Type the operation you want to do (+, -, *, /): ");
         operation = s.next().charAt(0);
         System.out.println("Type the first number to preform the operation on: ");
-        x1 = Integer.parseUnsignedInt(s.next(), base);
-        System.out.println("Type the second number to preform the operation on: ");
-        x2 = Integer.parseUnsignedInt(s.next(), base);
+        String input = s.next();
+        x1 = input.contains("-") ? -Integer.parseUnsignedInt(input.replace("-", ""), base) : Integer.parseUnsignedInt(input, base);
 
+        System.out.println("Type the second number to preform the operation on: ");
+        input = s.next();
+        x2 = input.contains("-") ? -Integer.parseUnsignedInt(input.replace("-", ""), base) : Integer.parseUnsignedInt(input, base);
         System.out.println("Here is the result: ");
         int result = calculate(x1, x2, operation);
         String x1Str;
@@ -45,11 +47,26 @@ public class Object_Oriented_CLI_Calculator {
         String resultStr;
         if(calculation == 'h'){
             System.out.println("Hex value: ");
-//            if(x1 < 0){
-//                x1Str =
-//            }
-            System.out.println(Integer.toHexString(x1) + operation + Integer.toHexString(x2));
-            System.out.println("= " + Integer.toHexString(result));
+            if(x1 < 0){
+                x1Str = "-" + Integer.toHexString(x1 / -1);
+            } else {
+                x1Str = Integer.toHexString(x1);
+            }
+
+            if(x2 < 0){
+                x2Str = "-" + Integer.toHexString(x2 / -1);
+            } else {
+                x2Str = Integer.toHexString(x2);
+            }
+
+            if(result < 0){
+                resultStr = "-" + Integer.toHexString(result / -1);
+            } else {
+                resultStr = Integer.toHexString(result);
+            }
+
+            System.out.println(x1Str + operation + x2Str);
+            System.out.println("= " + resultStr);
         } else {
             System.out.println("Binary value: ");
             System.out.println(String.format("%8s", Integer.toBinaryString(x1)).replace(' ', '0') + " " + operation + " " + String.format("%8s", Integer.toBinaryString(x2)).replace(' ', '0'));
@@ -95,4 +112,4 @@ public class Object_Oriented_CLI_Calculator {
                 return 0; //this needs to be here or else the compiler gets mad even though its unreachable
         }
     }
-}
+}   

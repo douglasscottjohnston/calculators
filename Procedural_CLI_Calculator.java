@@ -47,7 +47,7 @@ public class Procedural_CLI_Calculator {
     }
 
     /**
-     * Conversion.
+     * The method for preforming conversions on the passed value
      */
     public static void conversion(){
         if(calculation == 'h') {
@@ -108,7 +108,7 @@ public class Procedural_CLI_Calculator {
     }
 
     /**
-     * Operate.
+     * The method for performing operations on the passed values
      */
     public static void operate(){
         System.out.println("Type the operation you want to do (+, -, *, /): ");
